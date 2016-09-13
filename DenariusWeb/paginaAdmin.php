@@ -11,7 +11,6 @@
 	$id = $_SESSION['id'];
 	global $connect;
 	$result = mysqli_query($connect, "SELECT id FROM tabela");
-	$count = mysqli_num_rows($result);
 
 ?>
 
