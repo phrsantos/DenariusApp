@@ -10,7 +10,7 @@
 	
 
 ?>
-
+	
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -35,6 +35,8 @@
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+	
+	
   </head>
 
   <body class="nav-md">
@@ -287,8 +289,8 @@
           <!-- top tiles -->
           <div class="row tile_count">
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top" ><i class="fa fa-user"></i> Total Users</span>
-              <div class="count" id="total-users"></div>
+              <span class="count_top" ><i class="fa fa-user" ></i> Total Users</span>
+              <div id="totalusers" class="count" ></div>
               <span class="count_bottom"><i class="green">4% </i> From last Week</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
@@ -1295,6 +1297,7 @@
     <!-- /gauge.js -->
 	
 	<!--firebase code-->
+	
 	<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
 	
 	<script>
@@ -1306,11 +1309,42 @@
 			storageBucket: "denarius-10cc4.appspot.com",
 		};
 		firebase.initializeApp(config);
+		
 				
 	</script>
 	
-	<script type="text/javascript" src="js/database.js"></script>
-	<!--/firebase code-->
+	<script src="js/database.js"></script>
+	
+	<!--/firebase access code-->
+	<script>	
+	
+		query = firebase.database().ref("extrato").orderByChild("usuario");
+		var numerousuarios=0;
+		var usuarioanterior='FdZlCbQYMBgJKHRRVDV37DGxxWq2';
+		
+		query.once("value")
+		  .then(function(snapshot) {
+				
+			   snapshot.forEach(function(childSnapshot) {
+				   var childData = childSnapshot.val();
+				   
+				   if(usuarioanterior != childData.usuario){
+						usuarioanterior = childData.usuario;
+					    numerousuarios++;
+				   }else{
+					   
+						console.log('Usuario igual');
+				   }
+					 
+			   });
+			   
+			document.getElementById("totalusers").innerHTML = numerousuarios;
+		  });
+		  
+	</script>
+	
+	
+	
 	
 	
   </body>
