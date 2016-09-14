@@ -5,10 +5,8 @@ var USUARIO;
 
 
 
-		document.getElementById("totalusers").innerHTML = "5oo5";
 $(document).ready(function(){		
 		console.log('Executando database.js');
-		document.getElementById("totalusers").innerHTML = "5ooaaa5";
 	
 });
 

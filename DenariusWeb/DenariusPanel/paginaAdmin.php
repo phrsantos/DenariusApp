@@ -1317,25 +1317,22 @@
 	
 	<!--/firebase access code-->
 	<script>	
-	
+	//Total Users
 		query = firebase.database().ref("extrato").orderByChild("usuario");
 		var numerousuarios=0;
-		var usuarioanterior='FdZlCbQYMBgJKHRRVDV37DGxxWq2';
+		var usuarioanterior='none';
 		
 		query.once("value")
 		  .then(function(snapshot) {
-				
 			   snapshot.forEach(function(childSnapshot) {
 				   var childData = childSnapshot.val();
 				   
 				   if(usuarioanterior != childData.usuario){
 						usuarioanterior = childData.usuario;
 					    numerousuarios++;
-				   }else{
-					   
+				   }else{					   
 						console.log('Usuario igual');
 				   }
-					 
 			   });
 			   
 			document.getElementById("totalusers").innerHTML = numerousuarios;
