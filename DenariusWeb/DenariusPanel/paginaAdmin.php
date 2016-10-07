@@ -187,103 +187,7 @@
           </div>
         </div>
 
-        <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav>
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-
-              <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
-                    <span class=" fa fa-angle-down"></span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
-                    <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                  </ul>
-                </li>
-
-                <li role="presentation" class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">6</span>
-                  </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-        <!-- /top navigation -->
-
+        
         <!-- page content -->
         <div class="right_col" role="main">
           <!-- top tiles -->
@@ -318,8 +222,38 @@
               <div class="count">7,325</div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
             </div>
-          </div>
-          <!-- /top tiles -->          
+          </div>  
+		  
+          <!-- /top tiles -->   
+
+		  <!-- Tabela de tipos -->
+		  <div class="row">
+		  <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Basic Tables <small>basic table subtitle</small></h2>
+                    
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <table class="table" id="tabelaTipos">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+						  <th></th>
+                          <th>Tipo</th>
+                        </tr>
+                      </thead>					  
+                      
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+			  </div>
+		  
+		  <!-- /Tabela de tipos -->
 
         <!-- footer content -->
         <footer>
@@ -382,9 +316,36 @@
 			   
 			document.getElementById("totalusers").innerHTML = numeroUsuarios;
 			document.getElementById("totalentries").innerHTML = numeroEntradas;
-		  });
+		  });		
+		
 		  
 	</script>
+	
+	<script>
+	<!-- Tabela de tipos -->
+	  
+		query2 = firebase.database().ref("tipo");
+		
+		console.log("Tabela sendo criada");
+		var contadorTipos=0;
+		var linhaTabela;
+		
+		query2.once("value")
+			.then(function(snapshot) {
+			   snapshot.forEach(function(childSnapshot) {
+					contadorTipos++;
+				    var childData = childSnapshot.val();
+					
+				    linhaTabela = '<tbody><tr><th scope="row">' + contadorTipos + '<th>';
+				    linhaTabela+='<td>'+ childData.tipo + '</td>';
+				    linhaTabela+='</tr></tbody>';
+				   	   
+					$('#tabelaTipos').append(linhaTabela);
+				   
+			   })
+			});
+	</script>
+			
 	
 	
 	
