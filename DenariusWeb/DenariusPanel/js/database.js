@@ -7,6 +7,5 @@ var USUARIO;
 
 $(document).ready(function(){		
 		console.log('Executando database.js');
-	
 });
 

@@ -289,13 +289,13 @@
           <!-- top tiles -->
           <div class="row tile_count">
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top" ><i class="fa fa-user" ></i> Total Users</span>
+              <span class="count_top" ><i class="fa fa-user" ></i> Total de usuários</span>
               <div id="totalusers" class="count" ></div>
               <span class="count_bottom"><i class="green">4% </i> From last Week</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-clock-o"></i> Average Time</span>
-              <div class="count">123.50</div>
+              <span class="count_top"><i class="fa fa-clock-o"></i> Total de entradas</span>
+              <div class="count" id="totalentries">123.50</div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
@@ -1316,26 +1316,30 @@
 	<script src="js/database.js"></script>
 	
 	<!--/firebase access code-->
+	
 	<script>	
 	//Total Users
 		query = firebase.database().ref("extrato").orderByChild("usuario");
-		var numerousuarios=0;
-		var usuarioanterior='none';
+		var numeroUsuarios=0;
+		var usuarioAnterior='none';
+		var numeroEntradas=0;
 		
 		query.once("value")
 		  .then(function(snapshot) {
 			   snapshot.forEach(function(childSnapshot) {
 				   var childData = childSnapshot.val();
+				   numeroEntradas++;
 				   
-				   if(usuarioanterior != childData.usuario){
-						usuarioanterior = childData.usuario;
-					    numerousuarios++;
+				   if(usuarioAnterior != childData.usuario){
+						usuarioAnterior = childData.usuario;
+					    numeroUsuarios++;
 				   }else{					   
 						console.log('Usuario igual');
 				   }
 			   });
 			   
-			document.getElementById("totalusers").innerHTML = numerousuarios;
+			document.getElementById("totalusers").innerHTML = numeroUsuarios;
+			document.getElementById("totalentries").innerHTML = numeroEntradas;
 		  });
 		  
 	</script>
